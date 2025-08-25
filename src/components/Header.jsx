@@ -1,20 +1,24 @@
-// src/components/Header.js
 import React, { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { signOut } from "firebase/auth";
-import { auth } from "../components/firebase";
-import { FaChartLine, FaBars, FaTimes } from "react-icons/fa";
-import { IoHome } from "react-icons/io5";
-import { SlSpeech } from "react-icons/sl";
-import { MdContactSupport } from "react-icons/md";
-import { CiBoxList } from "react-icons/ci";
-import { CiLogin } from "react-icons/ci";
-import { CiLogout } from "react-icons/ci";
+import { auth } from "./firebase";
+import { 
+  LuChartLine,
+  LuLayoutDashboard,
+  LuInfo,
+  LuMail,
+  LuClipboardList,
+  LuLogIn,
+  LuLogOut,
+  LuMenu,
+  LuX
+} from "react-icons/lu";
+import "./Header.css";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const { user: currentUser } = useAuth();
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleLogout = () => {
@@ -22,75 +26,87 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
-  // Function to close the menu when a link is clicked
-  const closeMenu = () => {
-    setIsMenuOpen(false);
-  };
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  const closeMenu = () => setIsMenuOpen(false);
 
-  const getUsername = (email) => {
-    if (!email) return "User";
-    return email.split("@")[0];
-  };
+  const getUsername = (email) => email?.split("@")[0] || "User";
 
   return (
-    <header className="header">
+    <header className={`header ${isMenuOpen ? "header-open" : ""}`}>
       <div className="header-content">
+        {/* Logo */}
         <Link to="/" className="logo" onClick={closeMenu}>
-          <FaChartLine className="logo-icon" />
+          <LuChartLine className="logo-icon" />
           <span className="logo-text">Stock Analyzer</span>
         </Link>
 
-        <div className="menu-icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-          {isMenuOpen ? <FaTimes /> : <FaBars />}
-        </div>
+        {/* Desktop Navigation */}
+        <nav className="desktop-nav">
+          <div className="nav-section">
+            <NavLink to="/" className="nav-link" onClick={closeMenu} end>
+              <div className="nav-icon"><LuLayoutDashboard /><span>Home</span></div>
+            </NavLink>
+            <NavLink to="/about" className="nav-link" onClick={closeMenu}>
+              <div className="nav-icon"><LuInfo /><span>About</span></div>
+            </NavLink>
+            <NavLink to="/contact" className="nav-link" onClick={closeMenu}>
+              <div className="nav-icon"><LuMail /><span>Contact</span></div>
+            </NavLink>
+            <NavLink to="/watchlist" className="nav-link" onClick={closeMenu}>
+              <div className="nav-icon"><LuClipboardList /><span>Watchlist</span></div>
+            </NavLink>
+          </div>
 
-        <nav className={`nav-links ${isMenuOpen ? "nav-open" : ""}`}>
-          <NavLink to="/" className="nav-link" onClick={closeMenu}>
-            <div className="icons">
-              <IoHome />
-              <p>Home</p>
-            </div>
-          </NavLink>
-
-          {/* === ADDED LINKS START HERE === */}
-          <NavLink to="/about" className="nav-link" onClick={closeMenu}>
-            <div className="icons">
-              <SlSpeech /> <p>About</p>
-            </div>
-          </NavLink>
-          <NavLink to="/contact" className="nav-link" onClick={closeMenu}>
-            <div className="icons">
-              <MdContactSupport />
-              <p>Contact</p>
-            </div>
-          </NavLink>
-          <NavLink to="/watchlist" className="nav-link" onClick={closeMenu}>
-            <div className="icons">
-              <CiBoxList />
-              <p>My Watchlist</p>
-            </div>
-          </NavLink>
-
-          {/* === ADDED LINKS END HERE === */}
-
-          {currentUser ? (
-            <>
-              <span className="nav-link-welcome">
-                Hi, {getUsername(currentUser.email)}
-              </span>
-              <div className="icons">
-                <button onClick={handleLogout} className="nav-link-button">
-                  <CiLogout />
-                  Logout
+          <div className="nav-actions">
+            <ThemeToggle />
+            {currentUser ? (
+              <div className="user-section">
+                <span className="welcome-message">Hi, {getUsername(currentUser.email)}</span>
+                <button onClick={handleLogout} className="logout-button">
+                  <LuLogOut className="logout-icon" /><span>Logout</span>
                 </button>
               </div>
-            </>
+            ) : (
+              <NavLink to="/login" className="login-button" onClick={closeMenu}>
+                <LuLogIn className="login-icon" /><span>Login</span>
+              </NavLink>
+            )}
+          </div>
+        </nav>
+
+        {/* Mobile Navigation */}
+        <div className="mobile-nav">
+          <ThemeToggle />
+          <div className="menu-icon" onClick={toggleMenu}>
+            {isMenuOpen ? <LuX /> : <LuMenu />}
+          </div>
+        </div>
+
+        {/* Mobile Dropdown Menu */}
+        <nav className={`mobile-menu ${isMenuOpen ? "mobile-menu-open" : ""}`}>
+          <NavLink to="/" className="nav-link" onClick={closeMenu} end>
+            <div className="nav-icon"><LuLayoutDashboard /><span>Home</span></div>
+          </NavLink>
+          <NavLink to="/about" className="nav-link" onClick={closeMenu}>
+            <div className="nav-icon"><LuInfo /><span>About</span></div>
+          </NavLink>
+          <NavLink to="/contact" className="nav-link" onClick={closeMenu}>
+            <div className="nav-icon"><LuMail /><span>Contact</span></div>
+          </NavLink>
+          <NavLink to="/watchlist" className="nav-link" onClick={closeMenu}>
+            <div className="nav-icon"><LuClipboardList /><span>Watchlist</span></div>
+          </NavLink>
+          
+          {currentUser ? (
+            <div className="mobile-user-section">
+              <span className="welcome-message">Hi, {getUsername(currentUser.email)}</span>
+              <button onClick={handleLogout} className="logout-button">
+                <LuLogOut className="logout-icon" /><span>Logout</span>
+              </button>
+            </div>
           ) : (
-            <NavLink to="/login" className="nav-link" onClick={closeMenu}>
-              <div className="icons">
-                <CiLogin />
-                <p>Login</p>
-              </div>
+            <NavLink to="/login" className="login-button mobile-login" onClick={closeMenu}>
+              <LuLogIn className="login-icon" /><span>Login</span>
             </NavLink>
           )}
         </nav>
