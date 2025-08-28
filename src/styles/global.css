@@ -6,7 +6,7 @@
   -webkit-text-size-adjust: 100%;
   -moz-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  
+
   /* Light Theme (default) */
   --color-bg: #ffffff;
   --color-bg-secondary: #f8f9fa;
@@ -30,6 +30,8 @@
   --input-focus: #86b7fe;
   --input-placeholder: #6c757d;
   --input-hover-border: #adb5bd;
+  --color-bg-footer: #f5f5f5; /* Light mode footer background */
+  --color-border-footer: #ddd;
   --transition-speed: 0.3s;
   --form-border-radius: 8px;
   --form-padding: 0.75rem 1rem;
@@ -53,6 +55,8 @@
   --input-bg: #2d3748;
   --input-text: #e2e8f0;
   --input-border: #4a5568;
+  --color-bg-footer: #1c1c1c; /* Dark mode footer background */
+  --color-border-footer: #333; /* Dark mode footer border */
   --input-focus: #4fd1c5;
   --color-danger: #dc3545;
   --color-danger-hover: #ff6b6b;
@@ -69,8 +73,7 @@
 
 /* Smooth transitions for theme changes */
 * {
-  transition: 
-    background-color var(--transition-speed) ease-in-out,
+  transition: background-color var(--transition-speed) ease-in-out,
     color var(--transition-speed) ease-in-out,
     border-color var(--transition-speed) ease-in-out,
     box-shadow var(--transition-speed) ease-in-out;
@@ -100,7 +103,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-bg);
   color: var(--color-text);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 1.5;
 }
 
@@ -109,7 +113,7 @@ body {
   html {
     scroll-behavior: smooth;
   }
-  
+
   /* Animations */
   @keyframes pulse {
     0% {
@@ -127,14 +131,20 @@ body {
   }
 
   @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+      transform: rotate(360deg);
+    }
   }
 
   @keyframes progressBar {
-    0% { width: 0%; }
-    100% { width: 100%; }
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 100%;
+    }
   }
-  
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -202,7 +212,7 @@ select {
   html:focus-within {
     scroll-behavior: auto;
   }
-  
+
   *,
   *::before,
   *::after {
@@ -248,15 +258,9 @@ html.theme-transition-ready,
 html.theme-transition-ready *,
 html.theme-transition-ready *::before,
 html.theme-transition-ready *::after {
-  transition: 
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    color 0.3s ease,
-    fill 0.3s ease,
-    stroke 0.3s ease,
-    opacity 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
+  transition: background-color 0.3s ease, border-color 0.3s ease,
+    color 0.3s ease, fill 0.3s ease, stroke 0.3s ease, opacity 0.3s ease,
+    box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 /* Focus styles */

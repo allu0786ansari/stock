@@ -182,11 +182,10 @@ const ContactForm = () => {
 
           {status && (
             <div
-              className={`${styles["contact-status"]} ${
-                status.includes("successfully")
-                  ? styles["success"]
-                  : styles["error"]
-              }`}
+              className={`${styles["contact-status"]} ${status.includes("successfully")
+                ? styles["success"]
+                : styles["error"]
+                }`}
             >
               {status}
             </div>
