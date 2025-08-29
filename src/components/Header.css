@@ -44,7 +44,7 @@ body {
   max-height: 65px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   align-items: center;
 }
@@ -137,50 +137,90 @@ body {
   margin-top: 6px;
 }
 
-.login-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  background-color: var(--accent-color);
-  color: white;
-  text-decoration: none;
-  border: none;
+.user-dashboard {
+  margin-top:6px;
+  margin-left:0.5rem;
+  font-size: 1.75rem;
   cursor: pointer;
+}
+
+.login-button {
+   color:var(--header-text);
+  background-color: var(--header-hover);
+  width: 90%;
+  border-radius: 20px;
+  display: flex;
+  gap: 7px;
+  margin:2px 5px;
+  margin-top: 12px;
+  padding:0.6rem 1.2rem;
+    backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .login-button:hover {
-  background-color: var(--accent-hover);
+  background-color: var(--header-hover);
   transform: scale(1.05);
+  text-decoration: none;
 }
 
 .user-section {
+  border:4px soild white;
+  border-radius: 10px;
+  position:absolute;
+  top: 67px;
+  right: -45px;
+  background-color: var(--header-bg);
+  padding: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  align-items: start;
 }
 
 .welcome-message {
   font-size: 0.9rem;
   color: var(--header-text);
   opacity: 0.9;
+  font-weight: bold;
+}
+
+.user-profile {
+  color:var(--header-text);
+  background-color: var(--header-hover);
+  width: 90%;
+  border-radius: 20px;
+  display: flex;
+  gap: 7px;
+  margin:2px 5px;
+  margin-top: 12px;
+  padding:0.6rem 1.2rem;
+    backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-decoration: none;
+}
+
+.user-profile:hover, .logout-button:hover {
+    text-decoration: none;
+    background-color: transparent;
+    transform: scale(1.05);
 }
 
 .logout-button {
+ color:var(--header-text);
+  background-color: var(--header-hover);
+  width: 90%;
+  border-radius: 20px;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  background-color: transparent;
-  color: var(--header-text);
-  border: 1px solid var(--header-text);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  gap: 7px;
+  margin:2px 5px;
+  margin-top: 12px;
+  padding:0.6rem 1.2rem;
+    backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-decoration: none;
 }
 
 .logout-button:hover {
@@ -279,6 +319,12 @@ body {
 
   .mobile-menu.mobile-menu-open {
     transform: translateX(0%);
+  }
+
+  .nav-link-email {
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 0.5rem 0.5rem;
   }
 
   .nav-link {
