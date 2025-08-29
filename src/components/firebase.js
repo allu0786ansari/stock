@@ -1,4 +1,4 @@
-// src/components/firebase.js
+// firebase.js
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getDatabase } from "firebase/database";
@@ -22,7 +22,7 @@ const firebaseConfig = {
 const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
 
 const auth = getAuth(app);
-const database = getDatabase(app);
-const db = getFirestore(app);
+const realtimeDb = getDatabase(app);            // 🔄 Rename for clarity
+const firestoreDb = getFirestore(app);          // 🔄 Rename for clarity
 
-export { auth, database, db, app };
+export { auth, realtimeDb, firestoreDb };

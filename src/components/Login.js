@@ -5,11 +5,9 @@ import {
     GoogleAuthProvider,
 } from "firebase/auth";
 import { auth } from "../components/firebase";
-import { useNavigate, Link, useLocation } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { syncLocalToFirebase } from "../utils/watchlistManager";
 import "./Login.css";
-
-const provider = new GoogleAuthProvider();
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -17,23 +15,26 @@ const Login = () => {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
-    const location = useLocation();
-    const loginMessage = location.state?.message;
 
     const handleLogin = async (e) => {
         e.preventDefault();
         setError("");
         setLoading(true);
+
         try {
+            // Firebase authentication
             const userCredential = await signInWithEmailAndPassword(
                 auth,
                 email,
                 password
             );
+
+            // Sync local data to Firebase after login
             await syncLocalToFirebase(userCredential.user);
-            navigate("/"); // redirect to home
+
+            navigate("/"); // redirect to home page
         } catch (err) {
-            setError(err.message || "Failed to login. Please try again.");
+            setError(err.message);
         } finally {
             setLoading(false);
         }
@@ -42,17 +43,26 @@ const Login = () => {
     const handleGoogleLogin = async () => {
         setError("");
         setLoading(true);
+
         try {
+            const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
+
+            // Sync local data to Firebase after Google login
             await syncLocalToFirebase(result.user);
-            navigate("/");
+
+            navigate("/"); // redirect to home page
         } catch (err) {
-            if (err.code === "auth/popup-closed-by-user") {
-                setError("Sign-in cancelled by user.");
-            } else if (err.code === "auth/popup-blocked") {
-                setError("Popup blocked by browser. Please allow popups.");
+            const errorCode = err.code;
+
+            if (errorCode === "auth/popup-closed-by-user") {
+                setError("Sign-in cancelled by user");
+            } else if (errorCode === "auth/popup-blocked") {
+                setError(
+                    "Popup blocked by browser. Please allow popups and try again."
+                );
             } else {
-                setError(err.message || "Google sign-in failed.");
+                setError(err.message);
             }
         } finally {
             setLoading(false);
@@ -64,10 +74,7 @@ const Login = () => {
             <div className="login-container">
                 <h2>Login</h2>
 
-                {loginMessage && (
-                    <div className="login-message">{loginMessage}</div>
-                )}
-
+                {/* Google Sign-In Button */}
                 <button
                     onClick={handleGoogleLogin}
                     disabled={loading}
@@ -98,17 +105,14 @@ const Login = () => {
                         required
                         disabled={loading}
                     />
-
                     {error && <p className="login-error">{error}</p>}
-
                     <button type="submit" disabled={loading}>
                         {loading ? "Logging in..." : "Login"}
                     </button>
                 </form>
 
                 <p>
-                    Don&apos;t have an account?{" "}
-                    <Link to="/signup">Signup</Link>
+                    Don't have an account? <Link to="/signup">Signup</Link>
                 </p>
             </div>
         </div>
