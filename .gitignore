@@ -365,12 +365,6 @@ public
 *.sqlite
 *.db
 
-# Model checkpoints and large files
-checkpoints/
-models/
-weights/
-raw_data/
-processed_data/
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
