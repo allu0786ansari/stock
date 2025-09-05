@@ -19,6 +19,7 @@ The **Stock Analyzer** project is a complete stock market analysis tool utilizin
 ---
 
 ![Open Source Connect India](Images/osconnect.png)
+#OSCI #OpenSourceConnect
 
 ## Overview
 

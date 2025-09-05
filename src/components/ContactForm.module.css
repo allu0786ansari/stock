@@ -97,7 +97,7 @@
   font-size: 26px;
   margin-bottom: 15px;
   font-weight: 700;
-  color: var(--text-color)
+  color: var(--text-color);
 }
 
 .contact-form {
@@ -148,7 +148,6 @@ textarea {
   margin-top: 4px;
 }
 
-
 button {
   margin-top: 15px;
   padding: 14px;
@@ -187,7 +186,6 @@ button:disabled {
   color: var(--error-color);
 }
 
-
 @media (max-width: 900px) {
   .contact-main {
     flex-direction: column;
@@ -214,4 +212,3 @@ button:disabled {
     font-size: 13px;
   }
 }
-

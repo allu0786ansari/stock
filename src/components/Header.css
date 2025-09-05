@@ -44,7 +44,7 @@ body {
   max-height: 65px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  overflow: hidden;
+  overflow: visible;
   display: flex;
   align-items: center;
 }
@@ -74,10 +74,10 @@ body {
   color: var(--header-text);
   text-decoration: none;
   z-index: 1001;
-  padding-right: 5rem;
+  padding-right: 4rem;
 }
 .logo-icon {
-  font-size: 1.75rem;
+  font-size: 1.5rem;
   color: var(--primary-color);
 }
 
@@ -90,7 +90,7 @@ body {
 .nav-section {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.2rem;
 }
 
 .nav-link {
@@ -133,50 +133,94 @@ body {
   margin-left: 1rem;
 }
 
-.login-button {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  background-color: var(--accent-color);
-  color: white;
-  text-decoration: none;
-  border: none;
+.theme-toggle{
+  margin-top: 6px;
+}
+
+.user-dashboard {
+  margin-top:6px;
+  margin-left:0.5rem;
+  font-size: 1.75rem;
   cursor: pointer;
+}
+
+.login-button {
+   color:var(--header-text);
+  background-color: var(--header-hover);
+  width: 90%;
+  border-radius: 20px;
+  display: flex;
+  gap: 7px;
+  margin:2px 5px;
+  margin-top: 12px;
+  padding:0.6rem 1.2rem;
+    backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .login-button:hover {
-  background-color: var(--accent-hover);
+  background-color: var(--header-hover);
   transform: scale(1.05);
+  text-decoration: none;
 }
 
 .user-section {
+  border:4px soild white;
+  border-radius: 10px;
+  position:absolute;
+  top: 67px;
+  right: -45px;
+  background-color: var(--header-bg);
+  padding: 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  align-items: start;
 }
 
 .welcome-message {
   font-size: 0.9rem;
   color: var(--header-text);
   opacity: 0.9;
+  font-weight: bold;
+}
+
+.user-profile {
+  color:var(--header-text);
+  background-color: var(--header-hover);
+  width: 90%;
+  border-radius: 20px;
+  display: flex;
+  gap: 7px;
+  margin:2px 5px;
+  margin-top: 12px;
+  padding:0.6rem 1.2rem;
+    backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-decoration: none;
+}
+
+.user-profile:hover, .logout-button:hover {
+    text-decoration: none;
+    background-color: transparent;
+    transform: scale(1.05);
 }
 
 .logout-button {
+ color:var(--header-text);
+  background-color: var(--header-hover);
+  width: 90%;
+  border-radius: 20px;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.6rem 1.2rem;
-  border-radius: 50px;
-  font-weight: 600;
-  background-color: transparent;
-  color: var(--header-text);
-  border: 1px solid var(--header-text);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  gap: 7px;
+  margin:2px 5px;
+  margin-top: 12px;
+  padding:0.6rem 1.2rem;
+    backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-decoration: none;
 }
 
 .logout-button:hover {
@@ -193,8 +237,10 @@ body {
   display: none;
   flex-direction: column;
   width: 100%;
-  padding: 0 1.5rem 1.5rem;
+  /* padding: 0 1.5rem 1.5rem; */
   gap: 0.5rem;
+  margin-top: 30px;
+  height: 100%; 
 }
 
 .mobile-user-section {
@@ -232,6 +278,7 @@ body {
   }
   .header {
     padding: 0;
+    overflow: visible;
   }
   .menu-icon {
     display: flex;
@@ -239,7 +286,9 @@ body {
     height: 35px;
   }
   .header-content {
-    padding: 0;
+    padding: 20px;
+    width: 100%;
+    justify-content: space-between;
   }
   .logo {
     font-size: 1.25rem;
@@ -251,11 +300,31 @@ body {
   }
 
   .mobile-menu {
+    display: flex;
+    padding: 5px;
+    position: absolute;
+    backdrop-filter:blur(12px);
+     -webkit-backdrop-filter: blur(10px);
+    top: 40px; 
+    right: 0px;
+    width: 45%;
+    flex-direction: column;
+    height: 90vh;
+    border-radius: 10px;
+    transform: translateX(0); 
+    background: var(--header-bg, #2d2b2b);
+    transform: translateX(120%);
+    transition: transform 0.3s ease-in-out;
   }
 
   .mobile-menu.mobile-menu-open {
-    display: flex;
-    max-height: 1000px;
+    transform: translateX(0%);
+  }
+
+  .nav-link-email {
+    font-size: 1.2rem;
+    width: 100%;
+    padding: 0.5rem 0.5rem;
   }
 
   .nav-link {
@@ -263,4 +332,6 @@ body {
     padding: 0.8rem 1rem;
     width: 100%;
   }
+
 }
+

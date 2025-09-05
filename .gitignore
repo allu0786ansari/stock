@@ -354,9 +354,6 @@ public
 *.mlmodel
 
 # Data files
-*.csv
-*.json
-*.xlsx
 *.xls
 *.parquet
 *.feather
@@ -365,14 +362,6 @@ public
 *.sqlite
 *.db
 
-# Model checkpoints and large files
-checkpoints/
-models/
-weights/
-data/
-datasets/
-raw_data/
-processed_data/
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
