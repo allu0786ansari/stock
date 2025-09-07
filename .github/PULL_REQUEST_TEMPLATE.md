@@ -4,7 +4,7 @@
 
 #### Issue Title
 
-**Please enter the title of the issue related to your pull request.**  
+**Please enter the title of the issue related to your pull request.**
 _Example: Add Linear Regression model for stock prediction_
 
 #### Contributor Details
@@ -18,12 +18,12 @@ _Example: Add Linear Regression model for stock prediction_
 
 #### Closes
 
-**Mention the issue number that your PR fixes.**  
+**Mention the issue number that your PR fixes.**
 _Example: Closes #15_
 
 #### Describe Your Changes
 
-**What have you added or modified in this pull request?**  
+**What have you added or modified in this pull request?**
 _Be clear and specific. Example: "Integrated Decision Tree model in backend to support stock predictions."_
 
 #### Screenshots
