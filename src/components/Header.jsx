@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 import { signOut } from "firebase/auth";
 import { auth } from "./firebase";
-import { 
+import {
   LuChartLine,
   LuLayoutDashboard,
   LuInfo,
@@ -14,7 +14,7 @@ import {
   LuMenu,
   LuX,
 } from "react-icons/lu";
-import { FaRegUserCircle, FaUserAlt  } from "react-icons/fa";
+import { FaRegUserCircle, FaUserAlt } from "react-icons/fa";
 import "./Header.css";
 import ThemeToggle from "./ThemeToggle";
 
@@ -23,9 +23,26 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [dashBoardOpen, setDashBoardOpen] = useState(false);
 
+  const dropdownRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDashBoardOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   const handleLogout = () => {
     signOut(auth);
     setIsMenuOpen(false);
+    setDashBoardOpen(false); // close dropdown on logout
   };
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
@@ -59,35 +76,40 @@ const Header = () => {
             </NavLink>
           </div>
 
-
-          {/* //User-dashboard: */}
-          <div className="nav-actions">
-            <ThemeToggle className='toggle-theme' />
+          {/* User Dashboard */}
+          <div className="nav-actions" ref={dropdownRef}>
+            <ThemeToggle className="toggle-theme" />
             <div className="user-dashboard">
-                <FaRegUserCircle onClick={() => setDashBoardOpen(prev => !prev)}/>
+              <FaRegUserCircle onClick={() => setDashBoardOpen(prev => !prev)} />
             </div>
-           {dashBoardOpen ? <>
-             {currentUser ? (
-              <div className="user-section">
-                <span className="welcome-message">{getUsername(currentUser.email).toUpperCase()}</span>
-                <NavLink to='/profile' className="user-profile">
-                 <FaUserAlt /><span>Profile</span>
-                </NavLink>
-                <NavLink onClick={handleLogout} className="logout-button">
-                  <LuLogOut className="logout-icon" /><span>Logout</span>
-                </NavLink>
-              </div>
-            ) : (
-              <div className="user-section">
-                <NavLink to="/login" className="login-button" onClick={closeMenu}>
+            <div className={`user-section ${dashBoardOpen ? "show" : ""}`}>
+              {currentUser ? (
+                <>
+                  <span className="welcome-message">{getUsername(currentUser.email).toUpperCase()}</span>
+                  <NavLink
+                    to="/profile"
+                    className="user-profile"
+                    onClick={() => setDashBoardOpen(false)}
+                  >
+                    <FaUserAlt /><span>Profile</span>
+                  </NavLink>
+                  <NavLink
+                    onClick={handleLogout}
+                    className="logout-button"
+                  >
+                    <LuLogOut className="logout-icon" /><span>Logout</span>
+                  </NavLink>
+                </>
+              ) : (
+                <NavLink
+                  to="/login"
+                  className="login-button"
+                  onClick={() => { closeMenu(); setDashBoardOpen(false); }}
+                >
                   <LuLogIn className="login-icon" /><span>Login</span>
-               </NavLink>
-              </div>
-            )}
-            
-           </>
-            :
-            <>{null}</>}
+                </NavLink>
+              )}
+            </div>
           </div>
         </nav>
 
@@ -101,7 +123,9 @@ const Header = () => {
 
         {/* Mobile Dropdown Menu */}
         <nav className={`mobile-menu ${isMenuOpen ? "mobile-menu-open" : ""}`}>
-          {currentUser && <h1 className="nav-link-email">{getUsername(currentUser?.email).toUpperCase()}</h1>}
+          {currentUser && (
+            <h1 className="nav-link-email">{getUsername(currentUser?.email).toUpperCase()}</h1>
+          )}
 
           <NavLink to="/" className="nav-link" onClick={closeMenu} end>
             <div className="nav-icon"><LuLayoutDashboard /><span>Home</span></div>
@@ -115,23 +139,32 @@ const Header = () => {
           <NavLink to="/watchlist" className="nav-link" onClick={closeMenu}>
             <div className="nav-icon"><LuClipboardList /><span>Watchlist</span></div>
           </NavLink>
-         {currentUser ? 
-          <>
-            <NavLink to="/profile" className="nav-link" onClick={closeMenu}>
-              <div className="nav-icon"><FaUserAlt /><span>Profile</span></div>
-            </NavLink>
-            <NavLink onClick={() => {handleLogout(); closeMenu()}} className="logout-button">
-              <div className="nav-icon"><LuLogOut /><span>Logout</span></div>
-            </NavLink>
-          </>
-          :
-          <>
-            <NavLink to="/login" className="logout-button" onClick={closeMenu}>
+
+          {currentUser ? (
+            <>
+              <NavLink
+                to="/profile"
+                className="nav-link"
+                onClick={() => { closeMenu(); setDashBoardOpen(false); }}
+              >
+                <div className="nav-icon"><FaUserAlt /><span>Profile</span></div>
+              </NavLink>
+              <NavLink
+                onClick={() => { handleLogout(); closeMenu(); setDashBoardOpen(false); }}
+                className="logout-button"
+              >
+                <div className="nav-icon"><LuLogOut /><span>Logout</span></div>
+              </NavLink>
+            </>
+          ) : (
+            <NavLink
+              to="/login"
+              className="logout-button"
+              onClick={() => { closeMenu(); setDashBoardOpen(false); }}
+            >
               <div className="nav-icon"><LuLogIn /><span>Login</span></div>
             </NavLink>
-          </>}
-
-          
+          )}
         </nav>
       </div>
     </header>
