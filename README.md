@@ -1,19 +1,25 @@
-# Stock Analyzer
+# AI Stock Analyzer
 
 The **Stock Analyzer** project is a complete stock market analysis tool utilizing ML models. It allows users to input stock symbols, select date ranges, view historical stock trends, and see future stock price predictions via interactive charts.
 
 <div align = "center"
+    
 <img alt="Stars" src="https://img.shields.io/github/stars/SrigadaAkshayKumar/stock?style=flat&logo=github"/>
 <img alt="Forks" src="https://img.shields.io/github/forks/SrigadaAkshayKumar/stock?style=flat&logo=github"/>
 <img alt="Issues" src="https://img.shields.io/github/issues/SrigadaAkshayKumar/stock?style=flat&logo=github"/>
+<img alt="Issues Closed" src="https://img.shields.io/github/issues-closed/SrigadaAkshayKumar/stock?style=flat&logo=github"/>
 <img alt="Open Pull Requests" src="https://img.shields.io/github/issues-pr/SrigadaAkshayKumar/stock?style=flat&logo=github"/>
 <img alt="Close Pull Requests" src="https://img.shields.io/github/issues-pr-closed/SrigadaAkshayKumar/stock?style=flat&color=green&logo=github"/>
 </div>
+
 ## Live Demo
 
 [View Deployed App on Render](https://aistockanalyzer.onrender.com)
 
 ---
+
+![Open Source Connect India](Images/osconnect.png)
+#OSCI #OpenSourceConnect
 
 ## Overview
 
@@ -37,7 +43,6 @@ The **Stock Analyzer** project is a complete stock market analysis tool utilizin
 - **Flask:** Backend Framework
 - **yfinance:** Stock data extraction
 - **Pandas:** Data manipulation
-- **Scikit-learn:** to load and use the model
 
 ---
 
@@ -46,17 +51,25 @@ The **Stock Analyzer** project is a complete stock market analysis tool utilizin
 ```
 Directory structure:
 └── srigadaakshaykumar-stock/
+    ├── LICENSE
     ├── README.md
     ├── SETUP.md
     ├── CONTRIBUTION.md
+    ├── CODE_OF_CONDUCT.md
+    ├── SECURITY.md
+    ├── package-lock.json
     ├── package.json
     ├── static.json
     ├── backend/
+        ├──app/
+        ├──data/
     │   ├── app.py
+    |   ├── generate_csvs.py
     │   ├── requirements.txt
     │   ├── stock-prediction.ipynb
     │   └── tf.keras
     ├── public/
+    |   ├── icon.png
     │   ├── index.html
     │   ├── manifest.json
     │   └── robots.txt
@@ -69,14 +82,22 @@ Directory structure:
         ├── reportWebVitals.js
         ├── setupTests.js
         └── components/
-            ├── AuthContext.js
+            ├── About.jsx
+            ├── AuthContext.jsx
+            ├── BackToTopBtn.jsx
+            ├── ContactForm.jsx
             ├── firebase.js
+            ├── Footer.css
             ├── Footer.jsx
             ├── Header.jsx
+            ├── Login.css
             ├── Login.js
             ├── Prediction.jsx
-            ├── Signup.js
+            ├── SentimentChart.jsx
+            ├── SignUp.css
+            ├── Signup.jsx
             ├── Stockdata.jsx
+            ├── StockMetricCard.jsx
             ├── StockList.jsx
             └── data/
                 └── stockData.json
@@ -103,13 +124,15 @@ Directory structure:
 
 **Stock Analyzer** is currently in the **development stage** and hosted on a free hosting service for testing purposes.
 
+## The latest pulls are merged every Saturday.
+
 ## Future Enhancements
 
 We have a clear roadmap for improvements:
 
 - Allow more API calls per day
 - Reduce response time for end users
-- Add Internatinal stock exchanges
+- Add International stock exchanges
 - Enhance the user interface for better experience
 - Improve machine learning model accuracy
 - Provide more insightful and interactive visualizations
@@ -128,6 +151,8 @@ Please make sure to:
 - Review our [Contribution Guidelines](./CONTRIBUTION.md)
 - Follow the [Setup Instructions](./SETUP.md) to run the project locally
 - Join the [Discord](https://discord.gg/ypQSaPbsDv)
+
+![Open Source Connect India](Images/osconnect.png)
 
 ## License
 
