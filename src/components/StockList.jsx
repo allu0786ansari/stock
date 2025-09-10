@@ -7,7 +7,7 @@ import { auth } from "./firebase";
 import stockData from "./data/stockData.json";
 import BackToTopBtn from "./BackToTopBtn";
 import styles from "./StockList.module.css";
-import stockBg2 from "../Images/stock2.png";
+import stockBg2 from "./images/bg.png";
 
 const StocksList = () => {
   const [stocks, setStocks] = useState([]);
@@ -54,13 +54,13 @@ const StocksList = () => {
       animate={{ opacity: 1 }}
     >
       {/* 🚀 Hero Section */}
-  <section
+      <section
         className={styles.hero}
         style={{
           backgroundImage: `linear-gradient(135deg, rgba(33,84,214,0.63), rgba(29,30,41,0.46)), url(${stockBg2})`,
           backgroundSize: "contain", // CHANGED from 'cover' to 'contain'
           backgroundPosition: "center bottom", // Focus lower part (the phone/hand)
-          backgroundRepeat: "no-repeat"
+          backgroundRepeat: "no-repeat",
         }}
       >
         <h1>Welcome to Stock Analyzer!</h1>
