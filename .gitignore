@@ -346,7 +346,7 @@ public
 *.ckpt
 *.pt
 *.pth
-*.onnx
+*.onnx  
 *.tflite
 *.pb
 *.savedmodel
@@ -381,32 +381,7 @@ wandb/
 .dvc/
 .dvcignore
 
-# Large media files
-*.mp4
-*.avi
-*.mov
-*.wmv
-*.flv
-*.webm
-*.mkv
-*.mp3
-*.wav
-*.flac
-*.aac
-*.ogg
-*.wma
-*.jpg
-*.jpeg
-*.png
-*.gif
-*.bmp
-*.tiff
-*.svg
-*.ico
-*.psd
-*.ai
-*.eps
-*.pdf
+
 
 # Archives
 *.7z
